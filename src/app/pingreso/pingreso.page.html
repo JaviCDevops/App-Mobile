@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ profesorActual.nombre ? profesorActual.nombre + ' - Profesor' : 'Profesor' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ng-container *ngIf="profesorActual">
+    <ion-list *ngFor="let clase of profesorActual.clases">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ clase.nombre }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list *ngIf="clase.secciones.length > 0">
+            <ion-item *ngFor="let seccion of clase.secciones">
+              <ion-label>Sección: {{ seccion }}</ion-label>
+              <!-- Agrega un botón para cada sección -->
+              
+<ion-button expand="full" (click)="generarQR(clase.nombre, seccion)">Generar QR</ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  </ng-container>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button><ion-icon name="code"></ion-icon></ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button [routerLink]="['/home']"><ion-icon name="exit-outline"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <div>
+    <ion-img src="/assets/icon/logo.png"></ion-img>
+  </div>
+</ion-content>
